@@ -2,3 +2,4 @@ documentation.txt
 test.txt
 mariaDB.txt  
 secrets/
+.env

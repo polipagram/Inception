@@ -8,6 +8,10 @@ services:
       - root_passwd
       - user_passwd
 
+  
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
 
 secrets:
   root_passwd:
