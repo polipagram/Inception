@@ -4,3 +4,4 @@ mariaDB.txt
 secrets/
 .env
 SQL_CMDS.txt
+NGINX.txt
