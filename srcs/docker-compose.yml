@@ -3,18 +3,31 @@ services:
     build:
       context: ./requirements/mariadb
     container_name: mariadb
-
     secrets:
       - root_passwd
       - user_passwd
-
-  
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
 
 secrets:
   root_passwd:
     file: ../secrets/root_passwd.txt
   user_passwd:
     file: ../secrets/user_passwd.txt
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/mariadb
+      o: bind
+
+networks:
+  inception:
+    driver: bridge
