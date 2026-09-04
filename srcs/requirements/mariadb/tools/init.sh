@@ -6,10 +6,12 @@ set -e
 : "${MYSQL_USER:?Missing user}"
 
 if [ ! -f "/run/secrets/root_passwd" ]; then
+    echo "Error: root_passwd secret missing" >&2
     exit 1
 fi
 
 if [ ! -f "/run/secrets/user_passwd" ]; then
+    echo "Error: user_passwd secret missing" >&2
     exit 1
 fi
 
@@ -21,9 +23,9 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     mariadbd --user=mysql --bootstrap <<EOF
 FLUSH PRIVILEGES;
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWD}';
-CREATE DATABASE IF NOT EXISTS `${MYSQL_DATABASE}`;
+CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWD}';
-GRANT ALL PRIVILEGES ON `${MYSQL_DATABASE}`.* TO '${MYSQL_USER}'@'%';
+GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 fi
