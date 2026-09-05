@@ -13,6 +13,17 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
+  nginx:
+    build:
+      context: ./requirements/nginx
+
+    container_name: nginx
+
+    ports:
+      - "8080:443"
+
+    networks:
+      - inception
 
 secrets:
   root_passwd:
@@ -31,3 +42,4 @@ volumes:
 networks:
   inception:
     driver: bridge
+
