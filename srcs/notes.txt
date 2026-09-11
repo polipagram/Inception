@@ -1,0 +1,46 @@
+wordpress is a web application
+it is CMS (content management system)
+cms is the platform behid building a website
+
+
+components:
+    - free drag and drop
+    - free plugins
+    - free website templates
+
+
+
+docker volumes is a docker feture that maps
+file systems on a host machine to file systems on 
+a docker container 
+
+when a container shuts down the data changes
+inside the container is completely lost
+> issue : it's bad if we have data changes 
+to be persisted after the shutdown 
+ ex : database data
+
+ we create a volume : docker volume create name_of_volume
+
+ after creation: 
+ >sotrage 
+  dir path : var/lib/docker/volumes  
+
+  to check them 
+    > ls /var/lib/docker/volumes   
+and to access them you need sudo or root privillages
+
+
+to list them :
+    docker volume list
+
+location   | volume_name
+driver
+
+
+to see more info about the volume:
+    docker inspect volume_name
+
+it gives you for example the creation date
+and the mountpoint = location on the host machine
+
