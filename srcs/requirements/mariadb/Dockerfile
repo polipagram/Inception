@@ -14,4 +14,4 @@ EXPOSE 3306
 
 ENTRYPOINT ["/usr/local/bin/init.sh"]
 
-CMD ["mariadbd"]
+CMD ["mariadbd", "--user=mysql"]
