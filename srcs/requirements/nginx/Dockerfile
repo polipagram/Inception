@@ -4,15 +4,16 @@ RUN apt-get update && \
     apt-get install -y nginx openssl && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /etc/nginx/ssl && \
-    openssl req -x509 -nodes -days 365 \
-    -newkey rsa:2048 \
-    -keyout /etc/nginx/ssl/private.key \
-    -out /etc/nginx/ssl/certificate.crt \
-    -subj "/CN=localhost"
+COPY conf/nginx.cnf /etc/nginx/conf.d/default.conf
 
-COPY conf/nginx.cnf /etc/nginx/nginx.conf
-COPY tools/index.html /var/www/html/index.html
+COPY tools/init.sh /usr/local/bin/init.sh
+
+RUN chmod +x /usr/local/bin/init.sh
+
 EXPOSE 443
 
+ENTRYPOINT ["/usr/local/bin/init.sh"]
+
 CMD ["nginx", "-g", "daemon off;"]
+
+
