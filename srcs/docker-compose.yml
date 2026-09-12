@@ -2,6 +2,7 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
+    image: mariadb
     container_name: mariadb
     secrets:
       - root_passwd
@@ -16,7 +17,7 @@ services:
   nginx:
     build:
       context: ./requirements/nginx
-
+    image: nginx
     container_name: nginx
 
     ports:
@@ -24,6 +25,18 @@ services:
 
     networks:
       - inception
+
+  wordpress:
+    build: 
+      context: ./requirements/wordpress
+    image : wordpress
+    container_name : wordpress
+    networks:
+      - inception
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - mariadb
 
 secrets:
   root_passwd:
@@ -39,7 +52,17 @@ volumes:
       device: ${HOME}/data/mariadb
       o: bind
 
+  wordpress_data:
+      driver: local
+      driver_opts:
+        type: none
+        device: ${HOME}/data/wordpress
+        o: bind
+        
 networks:
   inception:
     driver: bridge
+
+
+
 
