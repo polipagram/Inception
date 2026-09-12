@@ -1,16 +1,13 @@
-events {}
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
 
-http {
-    server {
-        listen 443 ssl;
-        server_name _;
+    server_name kbouarfa.42.fr;
 
-        ssl_certificate /etc/nginx/ssl/certificate.crt;
-        ssl_certificate_key /etc/nginx/ssl/private.key;
+    root /var/www/html;
+    index index.php index.html;
 
-        location / {
-            root /var/www/html;
-            index index.html;
-        }
-    }
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 }
