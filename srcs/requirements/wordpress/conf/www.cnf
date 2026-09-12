@@ -1,0 +1,7 @@
+[www]
+listen = 9000
+user = www-data
+group = www-data
+pm = ondemand
+pm.max_children = 5
+clear_env = no
