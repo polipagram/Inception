@@ -19,6 +19,9 @@ WORKDIR /var/www/html
 RUN wget https://wordpress.org/latest.tar.gz \
     && tar -xzf latest.tar.gz --strip-components=1 \
     && rm latest.tar.gz
+    
+RUN wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x /usr/local/bin/wp
 
 COPY tools/init.sh /usr/local/bin/init.sh
 
