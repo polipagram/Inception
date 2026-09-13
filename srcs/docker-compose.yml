@@ -24,6 +24,8 @@ services:
       - "443:443"
     networks:
       - inception
+    volumes:
+    - wordpress_data:/var/www/html
     depends_on:
       - wordpress
 
