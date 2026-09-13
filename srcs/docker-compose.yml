@@ -14,23 +14,35 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
+
   nginx:
     build:
       context: ./requirements/nginx
     image: nginx
     container_name: nginx
-
     ports:
       - "8080:443"
-
     networks:
       - inception
 
   wordpress:
-    build: 
+    build:
       context: ./requirements/wordpress
-    image : wordpress
-    container_name : wordpress
+    image: wordpress
+    container_name: wordpress
+    secrets:
+      - user_passwd
+      - wp_admin_passwd
+      - wp_user_passwd
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      WP_ADMIN_USER: ${WP_ADMIN_USER}
+      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+      WP_USER: ${WP_USER}
+      WP_USER_EMAIL: ${WP_USER_EMAIL}
     networks:
       - inception
     volumes:
@@ -43,6 +55,10 @@ secrets:
     file: ../secrets/root_passwd.txt
   user_passwd:
     file: ../secrets/user_passwd.txt
+  wp_admin_passwd:
+    file: ../secrets/wp_admin_passwd.txt
+  wp_user_passwd:
+    file: ../secrets/wp_user_passwd.txt
 
 volumes:
   mariadb_data:
@@ -53,16 +69,12 @@ volumes:
       o: bind
 
   wordpress_data:
-      driver: local
-      driver_opts:
-        type: none
-        device: ${HOME}/data/wordpress
-        o: bind
-        
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/wordpress
+      o: bind
+
 networks:
   inception:
     driver: bridge
-
-
-
-
