@@ -7,9 +7,8 @@ services:
     secrets:
       - root_passwd
       - user_passwd
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
+    env_file:
+      - ../.env
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -38,15 +37,8 @@ services:
       - user_passwd
       - wp_admin_passwd
       - wp_user_passwd
-    environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      DOMAIN_NAME: ${DOMAIN_NAME}
-      WP_ADMIN_USER: ${WP_ADMIN_USER}
-      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
-      WP_USER: ${WP_USER}
-      WP_USER_EMAIL: ${WP_USER_EMAIL}
+    env_file:
+      - ../.env
     networks:
       - inception
     volumes:
