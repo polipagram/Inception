@@ -472,6 +472,25 @@ docker compose -f srcs/docker-compose.yml down -v
 
 ---
 
+## AI Usage
+
+AI tools were used as a learning and development aid during this project.
+
+They were mainly used to:
+
+* Clarify Docker and Docker Compose concepts such as images, containers, networks, volumes, secrets and service dependencies.
+* Help understand the roles and interactions of NGINX, WordPress, PHP-FPM and MariaDB.
+* Explain configuration concepts such as TLS/HTTPS, FastCGI, Docker networking and persistent storage.
+* Help troubleshoot configuration and runtime errors during development.
+* Review Dockerfiles, Docker Compose configuration, shell scripts and service configurations.
+* Suggest debugging commands and help interpret command output.
+* Improve the structure and clarity of the project documentation and README.
+
+AI was **not used to replace the implementation or understanding of the project**. The configuration files, Dockerfiles, scripts and infrastructure were implemented, tested and validated by the student.
+
+The project was tested manually using Docker Compose, Docker commands, browser access and service logs. AI-generated suggestions were reviewed and adapted when necessary to match the requirements of the 42 Inception subject.
+
+
 ## Documentation
 
 * [Project Overview — README](README.md)
