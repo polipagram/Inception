@@ -28,6 +28,7 @@ ps:
 
 fclean:
 	$(COMPOSE) -f $(YML) down -v --remove-orphans
+	sudo rm -rf $(DATA_DIR)
 
 re: fclean all
 
